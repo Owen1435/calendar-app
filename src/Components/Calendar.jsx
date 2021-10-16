@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import CalendarCell from "./CalendarCell";
+import WeekdayCell from "./WeekdayCell";
 
 const Calendar = () => {
 
@@ -15,7 +16,14 @@ const Calendar = () => {
         {fullName: 'October', name: 'Oct'},
         {fullName: 'November', name: 'Nov'},
         {fullName: 'December', name: 'Dec'}]
-    let weekday = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun']
+
+    let weekday = [{name: 'Mon'},
+        {name: 'Tue', className: ''},
+        {name: 'Wed', className: ''},
+        {name: 'Thu', className: ''},
+        {name: 'Fri', className: ''},
+        {name: 'Sat', className: 'weekend'},
+        {name: 'Sun', className: 'weekend'}]
 
     let curDate = new Date()
     let [selectedDate, setSelectedDate] = useState(curDate)
@@ -33,19 +41,20 @@ const Calendar = () => {
 
     function getDaysArr(date) {
         let days = []
-        let dateRange = getDateRange()
-        let firstDayOfCurrentDate = new Date(date.getFullYear(), date.getMonth(), 1).getDay()
+        let dateRange = getDateRange(selectedDate.getFullYear())
+        let firstDay = new Date(date.getFullYear(), date.getMonth(), 1).getDay()
 
-        for (let i = 1; i < firstDayOfCurrentDate; i++) {
-            days.push({content: ''})
+        for (let i = 1; i < firstDay; i++) {
+            days.push({content: '', className: ''})
         }
 
         for (let i = 1; i <= dateRange[date.getMonth()]; i++) {
-            if (i === curDate.getDate()){
+            if (i === curDate.getDate() &&
+                selectedDate.getFullYear() === curDate.getFullYear() &&
+                selectedDate.getMonth() === curDate.getMonth()) {
                 days.push({content: i, className: 'current-day'})
-            }
-            else {
-                days.push({content: i})
+            } else {
+                days.push({content: i, className: ''})
             }
         }
 
@@ -65,15 +74,14 @@ const Calendar = () => {
         <div className="calendar">
 
             <div className="calendar__buttons">
-                <button onClick={prevMonth}>{'<'}</button>
-                <button onClick={nextMonth}>{'>'}</button>
-            </div>
-
-            <div className="calendar__month">
-                {month[selectedDate.getMonth()].fullName}
+                <button onClick={prevMonth}>{'<<'}</button>
+                <div className="calendar__month">
+                    {month[selectedDate.getMonth()].fullName}
+                </div>
+                <button onClick={nextMonth}>{'>>'}</button>
             </div>
             <div className="calendar__days-name">
-                {weekday.map(weekday => <CalendarCell day={weekday}/>)}
+                {weekday.map(weekday => <WeekdayCell day={weekday}/>)}
             </div>
             <div className="calendar__days">
                 {days.map(day => <CalendarCell day={day}/>)}
