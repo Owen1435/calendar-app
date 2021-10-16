@@ -1,12 +1,12 @@
-import logo from './logo.svg';
 import './App.css';
+import Calendar from "./Components/Calendar";
+
+let date = new Date(2021, 11, 15)
 
 function App() {
-  return (
-    <div className="App">
-
-    </div>
-  );
+    return (
+        <Calendar/>
+    );
 }
 
 export default App;

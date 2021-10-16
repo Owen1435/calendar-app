@@ -1,1 +1,47 @@
+.calendar{
+    margin: 0 auto;
+    width: 400px;
+    padding: 20px;
+    border: 1px solid black;
+    margin-top: 200px;
+}
 
+.calendar__days{
+    display: grid;
+    grid-template-columns: repeat(7,1fr);
+    gap: 10px;
+}
+
+.calendar__days-name{
+    display: grid;
+    grid-template-columns: repeat(7,1fr);
+    gap: 10px;
+    border-bottom: 2px solid black;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+.calendar__month{
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.calendar__cell{
+    border: 1px solid black;
+    text-align: center;
+    height: 40px;
+}
+
+.calendar__cell.current-day{
+    background-color: red;
+}
+
+.calendar__cell:hover {
+    background-color: gray;
+}
+
+.calendar__buttons{
+    display: flex;
+    justify-content: space-between;
+}
