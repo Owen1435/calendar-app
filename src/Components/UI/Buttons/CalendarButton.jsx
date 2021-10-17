@@ -1,8 +1,9 @@
 import React from 'react';
+import s from './CalendarButton.module.css'
 
 const CalendarButton = ({children, ...props}) => {
     return (
-        <button className='calendar__button' {...props}>
+        <button className={s.calendar__button} {...props}>
             {children}
         </button>
     );

@@ -1,0 +1,72 @@
+.main {
+    display: flex;
+    margin: 100px auto;
+    width: 800px;
+}
+
+.todoBlock {
+    width: 400px;
+    height: 550px;
+    background-color: rgba(253, 70, 38, 0.8);
+    box-shadow: rgba(0, 0, 0, 0.2) 10px 10px 5px;
+    z-index: 1;
+}
+
+.selectedDate {
+    margin: 50px auto 0 auto;
+    width: 50%;
+    text-align: center;
+    padding-bottom: 15px;
+    color: white;
+}
+
+.selectedDate__day{
+    font-size: 120px;
+    margin: 0;
+    padding: 0;
+}
+
+.selectedDate__weekDay{
+    margin: 0;
+    padding: 0;
+    font-size: 22px;
+}
+
+.calendar {
+    box-sizing: border-box;
+    margin-top: 40px;
+    padding: 20px 15px;
+    width: 400px;
+    height: 460px;
+    box-shadow: rgba(0, 0, 0, 0.2) 2px 10px 5px;
+    background-color: white;
+}
+
+.calendar__title {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.calendar__month {
+    text-align: center;
+    font-size: 24px;
+    padding: 10px 0;
+}
+
+.calendar__daysName {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+    margin: 20px 0 15px 0;
+}
+
+.calendar__daysName div{
+    font-size: 18px;
+}
+
+.calendar__days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+}
