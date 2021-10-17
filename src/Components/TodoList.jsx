@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import TodoItem from "./TodoItem";
-import s from './TodoLIst.module.css'
+import s from './TodoLIst.module.scss'
 
 const TodoList = ({currentList, items, setItems}) => {
     const [title, setTitle] = useState('')

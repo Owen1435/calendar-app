@@ -1,0 +1,45 @@
+.header {
+  height: 50px;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.2) 0 5px 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo{
+  display: flex;
+  align-items: center;
+}
+
+.logo__name{
+  font-size: 20px;
+  font-weight: bold;
+  padding: 0 10px;
+}
+
+.logo img{
+  height: 40px;
+  margin-left: 10px;
+}
+
+.account {
+  display: flex;
+  align-items: center;
+}
+
+.account__login {
+  padding-right: 10px;
+}
+
+.account__settings{
+  background-color: white;
+  border: none;
+  padding-right: 10px;
+  margin: 0;
+  cursor: pointer;
+}
+
+.account__settings img{
+  height: 30px;
+}

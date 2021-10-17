@@ -1,3 +1,7 @@
+.items{
+
+}
+
 .todoList{
     margin: 0 auto;
     width: 300px;
@@ -8,4 +12,12 @@
     padding: 10px;
     display: flex;
     background-color: transparent;
+}
+
+.input input{
+    background-color: transparent;
+    border: none;
+    font-size: 20px;
+    width: 100%;
+    color: white;
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import s from './TodoItem.module.css'
+import s from './TodoItem.module.scss'
 
 const TodoItem = ({item}) => {
     return (

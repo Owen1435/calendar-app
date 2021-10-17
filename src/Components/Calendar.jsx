@@ -3,7 +3,7 @@ import CalendarCell from "./CalendarCell";
 import WeekdayCell from "./WeekdayCell";
 import CalendarButton from "./UI/Buttons/CalendarButton";
 import TodoList from "./TodoList";
-import s from './Calendar.module.css'
+import s from './Calendar.module.scss'
 import {weekday, getDaysArr, getDayName, getMonthName} from './DateFunctions'
 
 const Calendar = () => {
@@ -61,11 +61,11 @@ const Calendar = () => {
         <div className={s.main}>
             <div className={s.calendar}>
                 <div className={s.calendar__title}>
-                    <CalendarButton onClick={prevMonth}>{'<<'}</CalendarButton>
+                    <CalendarButton onClick={prevMonth}>{'<'}</CalendarButton>
                     <div className={s.calendar__month}>
                         {getMonthName(selectedDate)}
                     </div>
-                    <CalendarButton onClick={nextMonth}>{'>>'}</CalendarButton>
+                    <CalendarButton onClick={nextMonth}>{'>'}</CalendarButton>
                 </div>
 
                 <div className={s.calendar__daysName}>
@@ -78,6 +78,9 @@ const Calendar = () => {
             </div>
 
             <div className={s.todoBlock}>
+                <div className={s.todoBlock__add}>
+                    <button>+</button>
+                </div>
                 <div className={s.selectedDate}>
                     <div className={s.selectedDate__day}>{selectedDate.getDate()}</div>
                     <div className={s.selectedDate__weekDay}>{getDayName(selectedDate)}</div>

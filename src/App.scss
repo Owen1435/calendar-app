@@ -1,16 +1,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;500&display=swap');
 
+$red-color: rgba(253, 70, 38, 0.8);
+$grey-color: rgba(128, 128, 128, 0.2);
+
+:export{
+    redcolor: $red-color;
+    greycolor: $grey-color;
+}
+
 body{
     font-family: 'Montserrat', sans-serif;
-    background-color: rgba(128, 128, 128, 0.2);
+    background-color: $grey-color;
 }
 
 .calendar__cell{
     font-family: 'Montserrat', sans-serif;
     border: 0 solid black;
     text-align: center;
-    padding: 10px 5px;
-    margin: 0;
+    padding: 7px 3px;
+    margin: 4px 0;
     background-color: white;
     font-size: 20px;
 }
@@ -21,7 +29,7 @@ body{
 }
 
 .calendar__cell.current-day{
-    background-color: rgba(253, 70, 38, 0.8);
+    background-color: $red-color;
     color: white;
     border-radius: 50%;
 }

@@ -1,11 +1,13 @@
-import './App.css';
+import './App.scss';
 import Calendar from "./Components/Calendar";
-
-let date = new Date(2021, 11, 15)
+import Header from "./Components/Header";
 
 function App() {
     return (
-        <Calendar/>
+        <>
+            <Header/>
+            <Calendar/>
+        </>
     );
 }
 
