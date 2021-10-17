@@ -1,8 +1,8 @@
 import React from 'react';
 
-const CalendarCell = ({day}) => {
+const CalendarCell = ({date, selectDate}) => {
     return (
-        <div className={'calendar__cell ' + day?.className}>{day.content}</div>
+        <button className={'calendar__cell ' + date?.className} onClick={() => selectDate(date.content)}>{date.content?.getDate()}</button>
     );
 };
 

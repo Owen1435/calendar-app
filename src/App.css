@@ -3,6 +3,7 @@
     width: 400px;
     padding: 20px;
     border: 1px solid black;
+    box-shadow: rgba(0, 0, 0, 0.5) 5px 5px 2px;
 }
 
 .calendar__days{
@@ -30,7 +31,9 @@
 .calendar__cell{
     border: 0 solid black;
     text-align: center;
-    padding: 10px 5px;
+    padding: 12px 5px;
+    margin: 0;
+    background-color: white;
     font-size: 20px;
 }
 
@@ -49,13 +52,17 @@
     background-color: rgba(128, 128, 128, 0.5);
 }
 
+.calendar__cell.selected{
+    background-color: rgba(0, 255, 6, 0.5);
+}
+
 .calendar__buttons{
     display: flex;
     justify-content: space-between;
     margin-bottom: 10px;
 }
 
-.calendar__buttons button{
+.calendar__button{
     background-color: white;
     border: 0;
     padding: 0;
