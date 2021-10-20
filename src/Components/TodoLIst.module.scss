@@ -1,23 +1,40 @@
-.items{
+.items {
 
 }
 
-.todoList{
-    margin: 0 auto;
-    width: 300px;
+.todoList {
+  margin: 0 auto;
+  width: 300px;
 }
 
 .input {
-    margin: 10px;
-    padding: 10px;
-    display: flex;
-    background-color: transparent;
-}
+  margin: 10px;
+  padding: 10px;
+  display: flex;
+  background-color: transparent;
 
-.input input{
+  button {
+    color: white;
+    font-size: 30px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+  }
+
+  button:hover {
+    text-shadow: 0 0 10px #6e6e6e;
+    transition: 0.2s;
+  }
+
+  input {
     background-color: transparent;
     border: none;
     font-size: 20px;
     width: 100%;
     color: white;
+  }
+
+  :focus {
+    outline: none;
+  }
 }

@@ -1,0 +1,70 @@
+@import '../App';
+
+.loginForm {
+  width: 400px;
+  margin: 200px auto;
+  padding: 30px 10px;
+  border: 0 solid black;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.2) 2px 10px 5px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.title {
+  font-size: 25px;
+  text-align: center;
+  padding-bottom: 15px;
+  border-bottom: 2px solid $grey-color;
+}
+
+.inputBlock {
+  width: 200px;
+  margin: 20px auto;
+
+  input:focus {
+    outline:none;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.6);
+    transition: 0.5s;
+  }
+
+  input {
+    width: 100%;
+    height: 30px;
+    margin: 10px 0;
+    padding-top: 10px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    border: 0 solid black;
+    border-bottom: 2px solid $grey-color;
+  }
+}
+
+.buttons {
+  width: 200px;
+  margin: 30px auto 20px;
+
+  button, a{
+    display: block;
+    margin: 10px auto;
+    height: 40px;
+    width: 100%;
+    background-color: $main-color;
+    border: none;
+    cursor: pointer;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 5px;
+  }
+
+  a {
+    box-sizing: border-box;
+    display: block;
+    font-size: 18px;
+    font-weight: normal;
+    text-decoration: none;
+    text-align: center;
+    margin-top: 20px;
+    padding-top: 10px;
+  }
+}

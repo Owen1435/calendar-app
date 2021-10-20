@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import TodoItem from "./TodoItem";
 import s from './TodoLIst.module.scss'
 
-const TodoList = ({currentList, items, setItems}) => {
+const TodoList = ({currentList, setItems}) => {
     const [title, setTitle] = useState('')
 
     function addItem() {
@@ -14,7 +14,7 @@ const TodoList = ({currentList, items, setItems}) => {
 
         if (title !== '') {
             currentList.items = [...currentList.items, newItem]
-            setItems([...items, newItem])
+            setItems(currentList.items)
         }
 
         setTitle('')
@@ -28,7 +28,7 @@ const TodoList = ({currentList, items, setItems}) => {
 
             <div className={s.input}>
                 <input type="text" value={title} onChange={e => setTitle(e.target.value)}/>
-                <button onClick={addItem}>Add</button>
+                <button onClick={addItem}>+</button>
             </div>
         </div>
     );

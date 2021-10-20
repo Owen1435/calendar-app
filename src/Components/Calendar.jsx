@@ -3,6 +3,7 @@ import CalendarCell from "./CalendarCell";
 import WeekdayCell from "./WeekdayCell";
 import CalendarButton from "./UI/Buttons/CalendarButton";
 import TodoList from "./TodoList";
+
 import s from './Calendar.module.scss'
 import {weekday, getDaysArr, getDayName, getMonthName} from './DateFunctions'
 
@@ -19,9 +20,6 @@ const Calendar = () => {
         let newDate = new Date(selectedDate.getFullYear(), selectedDate.getMonth() - 1, 1)
         setSelectedDate(newDate)
     }
-
-    const [todoList, setTodoList] = useState([])
-    let currentList = getOrCreateTodoList()
 
     function getOrCreateTodoList() {
         const list = todoList.find(list => list.id.getFullYear() === selectedDate.getFullYear() &&
@@ -41,21 +39,15 @@ const Calendar = () => {
         return newList
     }
 
-    const [items, setItems] = useState(currentList.items)
-
     function selectDate(date) {
-        // let updateDays = days.map(day => {
-        //     if (day.content === date) {
-        //         return {...day, selected: true, className: day.className += ' selected'}
-        //     } else {
-        //         return {...day, selected: false}
-        //     }
-        // })
-
         setSelectedDate(date)
         currentList = getOrCreateTodoList()
         setItems(currentList.items)
     }
+
+    const [todoList, setTodoList] = useState([])
+    let currentList = getOrCreateTodoList()
+    const [items, setItems] = useState(currentList.items)
 
     return (
         <div className={s.main}>
@@ -86,7 +78,7 @@ const Calendar = () => {
                     <div className={s.selectedDate__weekDay}>{getDayName(selectedDate)}</div>
                 </div>
 
-                <TodoList currentList={currentList} items={items} setItems={setItems}/>
+                <TodoList currentList={currentList} setItems={setItems}/>
             </div>
         </div>
     );

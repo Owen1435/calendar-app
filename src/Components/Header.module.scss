@@ -29,7 +29,11 @@
 }
 
 .account__login {
+  display: block;
+  text-decoration: none;
+  color: black;
   padding-right: 10px;
+  font-size: 18px;
 }
 
 .account__settings{

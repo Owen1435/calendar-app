@@ -11,7 +11,7 @@ const Header = () => {
                 <div className={s.logo__name}>Calendar-app</div>
             </div>
             <div className={s.account}>
-                <div className={s.account__login}>Login</div>
+                <a className={s.account__login} href="/">Login</a>
                 <button className={s.account__settings}>
                     <img src={settings} alt="settings"/>
                 </button>
