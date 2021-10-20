@@ -23,6 +23,7 @@ const Register = () => {
             <a href="/calculator">calculator</a>
 
             <div className={s.loginForm}>
+                <div className={s.title}>REGISTER FORM</div>
                 <div className={s.inputBlock}>
                     <input type="text" value={login} onChange={e => setLogin(e.target.value)} placeholder='login'/>
                     <input type="text" value={email} onChange={e => setEmail(e.target.value)} placeholder='email'/>
