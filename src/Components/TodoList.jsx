@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import TodoItem from "./TodoItem";
 import s from './TodoLIst.module.scss'
 
-const TodoList = ({currentList, setItems}) => {
+const TodoList = ({currentList, setItems, isDisabledBtn, setDisabledBtn}) => {
     const [title, setTitle] = useState('')
 
     function addItem() {
@@ -18,6 +18,7 @@ const TodoList = ({currentList, setItems}) => {
         }
 
         setTitle('')
+        setDisabledBtn(true)
     }
 
     return (
@@ -27,8 +28,8 @@ const TodoList = ({currentList, setItems}) => {
             </div>
 
             <div className={s.input}>
-                <input type="text" value={title} onChange={e => setTitle(e.target.value)}/>
-                <button onClick={addItem}>+</button>
+                <input disabled={isDisabledBtn} type="text" value={title} onChange={e => setTitle(e.target.value)} onKeyUp={e => e.keyCode === 13 && addItem()}/>
+                {/*<button onClick={addItem}>+</button>*/}
             </div>
         </div>
     );

@@ -41,6 +41,9 @@ const Calendar = () => {
     let currentList = getOrCreateTodoList()
     const [items, setItems] = useState(currentList.items)
 
+    //для стилей
+    const [isDisabledBtn, setDisabledBtn] = useState(true)
+
     return (
         <>
             <Header/>
@@ -67,14 +70,14 @@ const Calendar = () => {
 
                 <div className={s.todoBlock}>
                     <div className={s.todoBlock__add}>
-                        <button>+</button>
+                        <button onClick={() => setDisabledBtn(!isDisabledBtn)}>+</button>
                     </div>
                     <div className={s.selectedDate}>
                         <div className={s.selectedDate__day}>{selectedDate.getDate()}</div>
                         <div className={s.selectedDate__weekDay}>{getDayName(selectedDate)}</div>
                     </div>
 
-                    <TodoList currentList={currentList} setItems={setItems}/>
+                    <TodoList currentList={currentList} setItems={setItems} isDisabledBtn={isDisabledBtn} setDisabledBtn = {setDisabledBtn}/>
                 </div>
             </div>
         </>
