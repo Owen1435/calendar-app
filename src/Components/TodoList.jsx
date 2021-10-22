@@ -28,7 +28,7 @@ const TodoList = ({currentList, setItems, isDisabledBtn, setDisabledBtn}) => {
             </div>
 
             <div className={s.input}>
-                <input disabled={isDisabledBtn} type="text" value={title} onChange={e => setTitle(e.target.value)} onKeyUp={e => e.keyCode === 13 && addItem()}/>
+                <input disabled={isDisabledBtn} type="text" value={title} onChange={e => setTitle(e.target.value)} onKeyUp={e => e.keyCode === 13 && addItem()} placeholder={'todo text (press Enter to save)'}/>
                 {/*<button onClick={addItem}>+</button>*/}
             </div>
         </div>

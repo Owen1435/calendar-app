@@ -2,11 +2,13 @@ import React, {useState} from 'react';
 import s from './Login.module.scss'
 import axios from "axios";
 import {Button} from "@mui/material";
+import {useHistory} from "react-router-dom";
 
 
 const Login = ({token, setToken}) => {
     const [login, setLogin] = useState('')
     const [pass, setPass] = useState('')
+    let history = useHistory();
 
     async function Login() {
         const res = await axios.post('https://api-nodejs-todolist.herokuapp.com/user/login', {
@@ -14,8 +16,10 @@ const Login = ({token, setToken}) => {
             email: 'asfdghj234werdsq@mail.ru',
         });
 
-        setToken(res.data.token)
         sessionStorage.setItem('token', res.data.token);
+        setToken(res.data.token)
+
+        history.push('/calculator')
     }
 
     // const [user, setUser] = useState({})

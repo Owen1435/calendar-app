@@ -16,14 +16,15 @@
 
 .todoBlock__add {
     text-align: right;
-}
 
-.todoBlock__add button {
-    font-size: 40px;
-    padding: 0 10px;
-    color: white;
-    background-color: transparent;
-    border: none;
+    button {
+        font-size: 40px;
+        padding: 0 10px;
+        color: white;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+    }
 }
 
 .selectedDate {
@@ -44,6 +45,7 @@
     margin: 0;
     padding: 0;
     font-size: 22px;
+    letter-spacing: 3px;
 }
 
 .calendar {
@@ -87,6 +89,7 @@
     grid-template-columns: repeat(7, 1fr);
     gap: 10px;
     margin: 15px 0;
+    text-align: center;
 }
 
 .calendar__daysName div {
