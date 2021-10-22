@@ -8,7 +8,7 @@ import s from './Calendar.module.scss'
 import {weekday, getDaysArr, getDayName, getMonthName, getPrevMonth, getNextMonth} from './DateFunctions'
 import Header from "./Header";
 
-const Calendar = () => {
+const Calendar = ({token}) => {
     let curDate = new Date()
     let [selectedDate, setSelectedDate] = useState(curDate)
     let days = getDaysArr(selectedDate)
@@ -46,7 +46,7 @@ const Calendar = () => {
 
     return (
         <>
-            <Header curDate ={curDate}/>
+            <Header curDate ={curDate} token = {token}/>
 
             <div className={s.main}>
                 <div className={s.calendar}>

@@ -16,7 +16,7 @@ function App() {
                 </Route>
                 <Route exact path='/calculator'>
                     {token
-                        ? <Calendar/>
+                        ? <Calendar token = {token}/>
                         : <Login token = {token} setToken = {setToken}/>
                     }
                 </Route>

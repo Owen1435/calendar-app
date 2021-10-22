@@ -22,21 +22,6 @@ const Login = ({token, setToken}) => {
         history.push('/calculator')
     }
 
-    // const [user, setUser] = useState({})
-    //
-    // async function getUser() {
-    //     const axios = require('axios');
-    //
-    //     const res = await axios.get('https://api-nodejs-todolist.herokuapp.com/user/me',
-    //         {
-    //             headers: {Authorization: 'Bearer ' + token}
-    //         });
-    //
-    //     console.log(res.status);
-    //     console.log(res.data);
-    //     setUser(res.data)
-    // }
-    //
     // async function addPost() {
     //     const axios = require('axios');
     //
