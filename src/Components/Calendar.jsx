@@ -46,7 +46,7 @@ const Calendar = () => {
 
     return (
         <>
-            <Header/>
+            <Header curDate ={curDate}/>
 
             <div className={s.main}>
                 <div className={s.calendar}>
