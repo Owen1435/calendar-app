@@ -23,7 +23,7 @@ const TodoList = ({currentList, setItems}) => {
     return (
         <div className={s.todoList}>
             <div className={s.items}>
-                {currentList.items.map(item => <TodoItem item={item}/>)}
+                {currentList.items.map(item => <TodoItem item={item} currentList = {currentList} setItems = {setItems}/>)}
             </div>
 
             <div className={s.input}>

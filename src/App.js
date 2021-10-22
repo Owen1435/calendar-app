@@ -1,22 +1,24 @@
 import './App.scss';
 import {BrowserRouter, Route} from "react-router-dom"
 import Calendar from "./Components/Calendar";
-import Header from "./Components/Header";
 import Login from "./Components/Login";
 import Register from "./Components/Register";
+import {useState} from "react";
 
 function App() {
-
+    const [token, setToken] = useState(sessionStorage.getItem('token'))
 
     return (
         <>
             <BrowserRouter>
                 <Route exact path='/'>
-                    <Login/>
+                    <Login token = {token} setToken = {setToken}/>
                 </Route>
                 <Route exact path='/calculator'>
-                    <Header/>
-                    <Calendar/>
+                    {token
+                        ? <Calendar/>
+                        : <Login token = {token} setToken = {setToken}/>
+                    }
                 </Route>
                 <Route exact path='/register'>
                     <Register/>

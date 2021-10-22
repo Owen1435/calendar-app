@@ -56,10 +56,24 @@
     background-color: white;
 }
 
+.calendar__year {
+    color: #6e6e6e;
+    font-size: 20px;
+    letter-spacing: 3px;
+
+    &:after {
+        content: '';
+        display: block;
+        height: 2px;
+        width: 56px;
+        background: #6e6e6e;
+    }
+}
+
 .calendar__title {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 10px;
+    margin-top: 15px;
 }
 
 .calendar__month {
@@ -72,7 +86,7 @@
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     gap: 10px;
-    margin: 20px 0 15px 0;
+    margin: 15px 0;
 }
 
 .calendar__daysName div {

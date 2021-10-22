@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import s from "./Login.module.scss";
 import axios from "axios";
+import {Button} from "@mui/material";
 
 const Register = () => {
     const [login, setLogin] = useState('')
@@ -20,7 +21,7 @@ const Register = () => {
 
     return (
         <>
-            <a href="/calculator">calculator</a>
+            <a href={"/calculator"}>calculator</a>
 
             <div className={s.loginForm}>
                 <div className={s.title}>REGISTER FORM</div>
@@ -30,7 +31,8 @@ const Register = () => {
                     <input type="text" value={pass} onChange={e => setPass(e.target.value)} placeholder='password'/>
                 </div>
                 <div className={s.buttons}>
-                    <button onClick={Register}>Register</button>
+                    <Button variant="contained" onClick={Register}>Register</Button>
+                    <a href={"/"}>Login</a>
                 </div>
             </div>
         </>
