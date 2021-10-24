@@ -2,17 +2,16 @@ import React from 'react';
 import classnames from 'classnames'
 import s from './TodoItem.module.scss'
 
-const TodoItem = ({item, currentList, setItems}) => {
+const TodoItem = ({item, currentList, deletePost}) => {
 
     function deleteItem() {
         currentList.items = currentList.items.filter(i => i !== item)
-        setItems(currentList.items)
+        deletePost(item.id)
     }
 
     function completeItem() {
         const compItem = currentList.items.find(i => i === item)
         compItem.completed = !compItem.completed;
-        setItems([...currentList.items])
     }
 
     return (

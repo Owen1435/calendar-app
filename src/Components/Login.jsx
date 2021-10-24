@@ -22,38 +22,6 @@ const Login = ({token, setToken}) => {
         history.push('/calculator')
     }
 
-    // async function addPost() {
-    //     const axios = require('axios');
-    //
-    //     const res = await axios.post('https://api-nodejs-todolist.herokuapp.com/task',
-    //         {
-    //             "description": 'AaAaAaaAaAaAaaaaAa'
-    //         },
-    //         {
-    //             headers: {
-    //                 'Authorization': 'Bearer ' + token,
-    //                 'Content-Type': 'application/json'
-    //             }
-    //         });
-    //
-    //     console.log(res.status);
-    //     setUser(res.data)
-    // }
-    //
-    // async function getPosts() {
-    //
-    //     const res = await axios.get('https://api-nodejs-todolist.herokuapp.com/task',
-    //         {
-    //             headers: {
-    //                 'Authorization': 'Bearer ' + token,
-    //                 'Content-Type': 'application/json'
-    //             }
-    //         });
-    //
-    //     console.log(res.status);
-    //     setUser(res.data)
-    // }
-
     return (
         <>
             <a href={"/calculator"}>calculator</a>
@@ -70,11 +38,6 @@ const Login = ({token, setToken}) => {
                     {/*<button onClick={Login}>Sign in</button>*/}
                     <Button variant="contained" onClick={Login}>Sign in</Button>
                     <a href={"/register"}>Register</a>
-
-                    {/*<div>{user['_id']}</div>*/}
-                    {/*<button onClick={getUser}>getUser</button>*/}
-                    {/*<button onClick={addPost}>addPost</button>*/}
-                    {/*<button onClick={getPosts}>getPosts</button>*/}
                 </div>
             </div>
         </>

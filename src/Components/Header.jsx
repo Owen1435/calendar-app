@@ -6,9 +6,8 @@ import axios from "axios";
 import {Tooltip} from "@mui/material";
 import {useHistory} from "react-router-dom";
 
-const Header = ({curDate, token}) => {
+const Header = ({curDate, token, user, setUser}) => {
     let history = useHistory();
-    const [user, setUser] = useState()
     useEffect(getUser,[token])
 
     async function getUser() {
