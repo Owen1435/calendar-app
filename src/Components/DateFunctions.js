@@ -37,13 +37,16 @@ function getDaysArr(selectedDate) {
     let lastDateOfPrevMonth = getDateRange(selectedDate.getFullYear())[(selectedDate.getMonth() - 1) < 0 ? 11 : (selectedDate.getMonth() - 1)]
     for (let i = firstDay - 2; i >= 0; i--) {
         days.push({
-            content: new Date(selectedDate.getFullYear(), selectedDate.getMonth() - 1, lastDateOfPrevMonth - i),
+            date: new Date(selectedDate.getFullYear(), selectedDate.getMonth() - 1, lastDateOfPrevMonth - i),
             disabled: true
         })
     }
 
     for (let day = 1; day <= dateRange[selectedDate.getMonth()]; day++) {
-        days.push({content: new Date(selectedDate.getFullYear(), selectedDate.getMonth(), day)})
+        days.push({
+            date: new Date(selectedDate.getFullYear(), selectedDate.getMonth(), day),
+            disabled: false
+        })
     }
 
     return days

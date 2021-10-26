@@ -3,10 +3,10 @@ import {compareDate} from './DateFunctions'
 import classnames from "classnames";
 import s from './CalendarCell.module.scss'
 
-const CalendarCell = ({date, selectDate, selectedDate}) => {
+const CalendarCell = ({day, selectDate, selectedDate}) => {
     return (
-        <button className={classnames(s.calendar__cell, {[s.selected]:compareDate(date.content,selectedDate), [s.disabled]: date.disabled})}
-                onClick={() => selectDate(date.content)}>{date.content?.getDate()}</button>
+        <button className={classnames(s.calendar__cell, {[s.selected]:compareDate(day.date,selectedDate), [s.disabled]: day.disabled})}
+                onClick={() => selectDate(day.date)}>{day.date?.getDate()}</button>
     );
 };
 

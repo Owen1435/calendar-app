@@ -2,30 +2,22 @@ import React, {useState} from 'react';
 import TodoItem from "./TodoItem";
 import s from './TodoLIst.module.scss'
 
-const TodoList = ({addPost, deletePost, currentList, isDisabledBtn, setDisabledBtn}) => {
+const TodoList = ({addPost, deletePost, tasks, completePost, isDisabledBtn, setDisabledBtn}) => {
     const [title, setTitle] = useState('')
 
     function addItem() {
-        const newItem = {
-            date: Date.now(),
-            content: title,
-            completed: false
-        }
-
         if (title !== '') {
-            currentList.items = [...currentList.items, newItem]
+            addPost(title)
         }
 
         setTitle('')
         setDisabledBtn(true)
-
-        addPost(title)
     }
 
     return (
         <div className={s.todoList}>
             <div className={s.items}>
-                {currentList?.items.map(item => <TodoItem item={item} currentList = {currentList} deletePost={deletePost}/>)}
+                {tasks?.map(item => <TodoItem key={item.id} item={item} deletePost={deletePost} completePost={completePost}/>)}
             </div>
 
             <div className={s.input}>

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import CalendarCell from "./CalendarCell";
 import WeekdayCell from "./WeekdayCell";
 import CalendarButton from "./UI/Buttons/CalendarButton";
@@ -10,40 +10,25 @@ import Header from "./Header";
 import axios from "axios";
 
 const Calendar = ({token}) => {
-    let curDate = new Date()
+    const curDate = new Date()
     let [selectedDate, setSelectedDate] = useState(curDate)
     let days = getDaysArr(selectedDate)
+    const [tasks, setTasks] = useState([])
+
+    useEffect(() => getPosts(selectedDate), [selectedDate])
 
     const [user, setUser] = useState()
-    const [todoList, setTodoList] = useState([])
-    let currentList = getOrCreateTodoList(selectedDate)
-
     const [isDisabledBtn, setDisabledBtn] = useState(true)   //для стилей
-
-    function getOrCreateTodoList(date) {
-        const list = todoList.find(list => compareDate(list.date, date))
-        if (list){
-            return list
-        }
-        const newList = {date: date, items: []}
-        setTodoList([...todoList, newList])
-        return newList
-
-        //setTodoList([...todoList, newList])
-        //todoList.push(newList)
-    }
 
     function selectDate(date) {
         setSelectedDate(date)
-        currentList = getOrCreateTodoList(date)
+        setTasks([])
     }
 
-    async function addPost(post) {
-        const date = `${selectedDate.getFullYear()}.${selectedDate.getMonth() + 1}.${selectedDate.getDate()}`
-
+    async function addPost(text) {
         const response = await axios.post('https://api-nodejs-todolist.herokuapp.com/task',
             {
-                "description": JSON.stringify({'date': date, 'text': post})
+                "description": JSON.stringify({'date': selectedDate.getTime(), 'text': text})
             },
             {
                 headers: {
@@ -52,10 +37,11 @@ const Calendar = ({token}) => {
                 }
             });
 
-        console.log(response.status);
+        console.log('addPost: ' + response.statusText);
+        getPosts(selectedDate)
     }
 
-    async function getPosts() {
+    async function getPosts(selectDate) {
         const response = await axios.get('https://api-nodejs-todolist.herokuapp.com/task',
             {
                 headers: {
@@ -63,21 +49,20 @@ const Calendar = ({token}) => {
                     'Content-Type': 'application/json'
                 }
             });
+        console.log('getPosts: ' + response.statusText);
 
-        console.log(response.status);
-
+        const tasks = []
         response.data.data.forEach((item) => {
             const object = JSON.parse(item.description)
 
-            const arr = object.date.split('.')
-            const date = new Date(Number(arr[0]), Number(arr[1]) - 1, Number(arr[2]))
+            const date = new Date(object.date)
             const text = object.text
 
-            console.log(date + ' ' + text);
-
-            const list = getOrCreateTodoList(date)
-            list.items = [...list.items, {id: item._id, date: date, content: text, completed: object.completed}]
+            if (compareDate(date, selectDate)) {
+                tasks.push({id: item._id, text: text, completed: item.completed})
+            }
         })
+        setTasks(tasks)
     }
 
     async function deletePost(id) {
@@ -88,8 +73,24 @@ const Calendar = ({token}) => {
                     'Content-Type': 'application/json'
                 }
             });
+        console.log('deletePost: ' + response.statusText);
 
-        console.log(response.status);
+        getPosts(selectedDate)
+    }
+
+    async function completePost(item) {
+        const response = await axios.put('https://api-nodejs-todolist.herokuapp.com/task/' + item.id,
+            {
+                "completed": !item.completed
+            },
+            {
+                headers: {
+                    'Authorization': 'Bearer ' + token,
+                    'Content-Type': 'application/json'
+                }
+            });
+        console.log('completePost: ' + response.statusText);
+        getPosts(selectedDate)
     }
 
     async function deleteAllPosts() {
@@ -102,20 +103,14 @@ const Calendar = ({token}) => {
             });
 
         response.data.data.forEach((item) => {
+            console.log('Remove: ' + item._id)
             deletePost(item._id)
         })
     }
 
     return (
         <>
-            <div>
-                {/*<button onClick={addPost}>addPost</button>*/}
-                <button onClick={getPosts}>getPosts</button>
-                <button onClick={deletePost('')}>deletePost</button>
-                <button onClick={deleteAllPosts}>deleteAllPosts</button>
-            </div>
-
-            <Header curDate={curDate} token={token} user={user} setUser={setUser}/>
+            <Header curDate={curDate} token={token} user={user} setUser={setUser} getPosts={getPosts} deleteAllPosts={deleteAllPosts}/>
 
             <div className={s.main}>
                 <div className={s.calendar}>
@@ -131,11 +126,11 @@ const Calendar = ({token}) => {
                     </div>
 
                     <div className={s.calendar__daysName}>
-                        {weekday.map(weekday => <WeekdayCell key={weekday} day={weekday}/>)}
+                        {weekday.map(weekday => <WeekdayCell key={weekday.fullName} day={weekday}/>)}
                     </div>
 
                     <div className={s.calendar__days}>
-                        {days.map(date => <CalendarCell key={date} date={date} selectDate={selectDate}
+                        {days.map(day => <CalendarCell key={day.date} day={day} selectDate={selectDate}
                                                         selectedDate={selectedDate}/>)}
                     </div>
                 </div>
@@ -150,8 +145,9 @@ const Calendar = ({token}) => {
                     </div>
 
                     <TodoList addPost={addPost}
-                              deletePost = {deletePost}
-                              currentList={currentList}
+                              deletePost={deletePost}
+                              tasks={tasks}
+                              completePost={completePost}
                               isDisabledBtn={isDisabledBtn}
                               setDisabledBtn={setDisabledBtn}/>
                 </div>

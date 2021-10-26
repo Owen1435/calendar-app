@@ -1,25 +1,20 @@
 import React from 'react';
 import classnames from 'classnames'
 import s from './TodoItem.module.scss'
+import accept from './assets/img/accept.png'
 
-const TodoItem = ({item, currentList, deletePost}) => {
+const TodoItem = ({item, deletePost, completePost}) => {
 
     function deleteItem() {
-        currentList.items = currentList.items.filter(i => i !== item)
         deletePost(item.id)
     }
 
-    function completeItem() {
-        const compItem = currentList.items.find(i => i === item)
-        compItem.completed = !compItem.completed;
-    }
-
     return (
-        <div className={s.todoItem}>
-            <button className={s.completeBtn} onClick={completeItem}/>
-            <div className={classnames(s.content, {[s.completed]: item.completed})}>
-                {item.content}
-            </div>
+        <div className={classnames(s.todoItem, {[s.completed]: item.completed})}>
+            <button className={s.completeBtn} onClick={() => completePost(item)}>
+                <img src={accept} alt="."/>
+            </button>
+            <div className={s.content}>{item.text}</div>
             <div className={s.delete}>
                 <button onClick={deleteItem}>x</button>
             </div>
