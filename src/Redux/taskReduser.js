@@ -1,13 +1,12 @@
-import {ADD_TASK} from './types'
+import {FILL_TASKS} from './types'
 
-//action = {type: '', payload: ''}
-function taskReduser(state = [], action) {
+function taskReducer(state = [], action) {
     switch (action.type) {
-        case ADD_TASK:
-
+        case FILL_TASKS:
+            return action.payload
         default:
             return state
     }
 }
 
-export default taskReduser
+export {taskReducer}

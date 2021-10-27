@@ -8,17 +8,19 @@ import s from './Calendar.module.scss'
 import {weekday, getDaysArr, getDayName, getMonthName, getPrevMonth, getNextMonth, compareDate} from './DateFunctions'
 import Header from "./Header";
 import axios from "axios";
+import {useDispatch, useSelector} from "react-redux";
+import {addTask, completeTask, deleteAllTask, deleteTask, fillTasks} from "../Redux/actions";
 
 const Calendar = ({token}) => {
     const curDate = new Date()
     let [selectedDate, setSelectedDate] = useState(curDate)
     let days = getDaysArr(selectedDate)
+    const [user, setUser] = useState()
+    const [isDisabledBtn, setDisabledBtn] = useState(true)   //для стилей
+
     const [tasks, setTasks] = useState([])
 
     useEffect(() => getPosts(selectedDate), [selectedDate])
-
-    const [user, setUser] = useState()
-    const [isDisabledBtn, setDisabledBtn] = useState(true)   //для стилей
 
     function selectDate(date) {
         setSelectedDate(date)
@@ -108,8 +110,37 @@ const Calendar = ({token}) => {
         })
     }
 
+    const dispatch = useDispatch()
+    const reduxTasks = useSelector(state => state.tasks)
+
+    function reduxFillTasks() {
+        dispatch(fillTasks(token, selectedDate))
+    }
+
+    function reduxAddTask() {
+        dispatch(addTask(token, selectedDate, '123456789'))
+    }
+
+    function reduxCompleteTask() {
+        dispatch(completeTask(token, selectedDate, reduxTasks[0]))
+    }
+
+    function reduxDeleteTask() {
+        dispatch(deleteTask(token, selectedDate, reduxTasks[0].id))
+    }
+
+    function reduxDeleteAllTask() {
+        dispatch(deleteAllTask(token, selectedDate))
+    }
+
     return (
         <>
+            <button onClick={reduxFillTasks}>reduxFillTasks</button>
+            <button onClick={reduxAddTask}>reduxAddTask</button>
+            <button onClick={reduxDeleteTask}>reduxDeleteTask</button>
+            <button onClick={reduxCompleteTask}>reduxCompleteTask</button>
+            <button onClick={reduxDeleteAllTask}>reduxDeleteAllTask</button>
+
             <Header curDate={curDate} token={token} user={user} setUser={setUser} getPosts={getPosts} deleteAllPosts={deleteAllPosts}/>
 
             <div className={s.main}>
