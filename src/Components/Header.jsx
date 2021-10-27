@@ -5,9 +5,11 @@ import settings from './assets/img/Settings.png'
 import axios from "axios";
 import {Button, Menu, MenuItem, Tooltip} from "@mui/material";
 import {useHistory} from "react-router-dom";
+import {useDispatch} from "react-redux";
+import {deleteAllTask, fillTasks} from "../Redux/actions";
 
 
-const Header = ({curDate, token, user, setUser, deleteAllPosts, getPosts}) => {
+const Header = ({token,selectedDate, user, setUser}) => {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
@@ -17,6 +19,7 @@ const Header = ({curDate, token, user, setUser, deleteAllPosts, getPosts}) => {
         setAnchorEl(null);
     };
 
+    const dispatch = useDispatch()
     let history = useHistory();
     useEffect(getUser, [token])
 
@@ -30,7 +33,7 @@ const Header = ({curDate, token, user, setUser, deleteAllPosts, getPosts}) => {
         setUser(response.data)
     }
 
-    function Logout() {
+    function logout() {
         sessionStorage.setItem('token', '');
         history.push('/')
     }
@@ -42,12 +45,11 @@ const Header = ({curDate, token, user, setUser, deleteAllPosts, getPosts}) => {
                 <div className={s.logo__name}>Calendar-app</div>
             </div>
             <div
-                className={s.today}>{`Today: ${curDate.getDate()}.${curDate.getMonth() + 1}.${curDate.getFullYear()}`}</div>
+                className={s.today}>{`Today: ${new Date().getDate()}.${new Date().getMonth() + 1}.${new Date().getFullYear()}`}</div>
             <div className={s.account}>
                 <Tooltip title="Logout">
-                    <button className={s.userData} onClick={Logout}>{user?.email}</button>
+                    <button className={s.userData} onClick={logout}>{user?.email}</button>
                 </Tooltip>
-
 
                 <Button
                     id="basic-button"
@@ -70,11 +72,7 @@ const Header = ({curDate, token, user, setUser, deleteAllPosts, getPosts}) => {
                 >
                     <MenuItem onClick={() => {
                         handleClose()
-                        getPosts()
-                    }}>get posts</MenuItem>
-                    <MenuItem onClick={() => {
-                        handleClose()
-                        deleteAllPosts()
+                        dispatch(deleteAllTask(token, selectedDate))
                     }}>delete all posts</MenuItem>
                 </Menu>
             </div>

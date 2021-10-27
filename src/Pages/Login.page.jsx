@@ -1,11 +1,10 @@
 import React, {useState} from 'react';
-import s from './Login.module.scss'
+import s from '../Components/Login.module.scss'
 import axios from "axios";
 import {Button} from "@mui/material";
 import {useHistory} from "react-router-dom";
 
-
-const Login = ({token, setToken}) => {
+const LoginPage = ({token, setToken}) => {
     const [login, setLogin] = useState('')
     const [pass, setPass] = useState('')
     let history = useHistory();
@@ -44,4 +43,4 @@ const Login = ({token, setToken}) => {
     );
 };
 
-export default Login;
+export default LoginPage;

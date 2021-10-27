@@ -1,1 +1,2 @@
 export const FILL_TASKS = 'FILL_TASKS'
+export const ADD_DATE_WITH_TASKS = 'ADD_DATE_WITH_TASKS'

@@ -23,7 +23,7 @@
   }
 
   &.selected{
-    background: $main-back-radial-color;
+    background: $main-back-liner-color;
     background-color: $main-color;
     color: white;
     border-radius: 50%;
@@ -31,6 +31,24 @@
 
   &.disabled {
     color: rgba(110, 110, 110, 0.6);
+  }
+
+  &.haveTasks {
+    position: relative;
+
+    &:after {
+      content: '';
+      position: absolute;
+      display: block;
+      left: 15px;
+      bottom: 2px;
+
+      height: 2px;
+      width: 2px;
+      border: 1px solid $main-color;
+      border-radius: 50%;
+      background: $main-color;
+    }
   }
 }
 

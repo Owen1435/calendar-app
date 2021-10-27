@@ -1,13 +1,18 @@
 import React, {useState} from 'react';
 import TodoItem from "./TodoItem";
 import s from './TodoLIst.module.scss'
+import {useDispatch, useSelector} from "react-redux";
+import {addTask} from "../Redux/actions";
 
-const TodoList = ({addPost, deletePost, tasks, completePost, isDisabledBtn, setDisabledBtn}) => {
+const TodoList = ({token, selectedDate, isDisabledBtn, setDisabledBtn}) => {
+    const dispatch = useDispatch()
+    const tasks = useSelector(state => state.tasks.items)
+
     const [title, setTitle] = useState('')
 
     function addItem() {
         if (title !== '') {
-            addPost(title)
+            dispatch(addTask(token, selectedDate, title))
         }
 
         setTitle('')
@@ -17,7 +22,7 @@ const TodoList = ({addPost, deletePost, tasks, completePost, isDisabledBtn, setD
     return (
         <div className={s.todoList}>
             <div className={s.items}>
-                {tasks?.map(item => <TodoItem key={item.id} item={item} deletePost={deletePost} completePost={completePost}/>)}
+                {tasks?.map(item => <TodoItem key={item.id} item={item} token={token} selectedDate={selectedDate}/>)}
             </div>
 
             <div className={s.input}>

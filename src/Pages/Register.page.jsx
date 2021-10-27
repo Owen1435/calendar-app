@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
-import s from "./Login.module.scss";
+import s from "../Components/Login.module.scss";
 import axios from "axios";
 import {Button} from "@mui/material";
 
-const Register = () => {
+const RegisterPage = () => {
     const [login, setLogin] = useState('')
     const [pass, setPass] = useState('')
     const [email, setEmail] = useState('')
@@ -39,4 +39,4 @@ const Register = () => {
     );
 };
 
-export default Register;
+export default RegisterPage;

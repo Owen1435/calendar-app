@@ -1,6 +1,6 @@
-import {FILL_TASKS} from './types'
+import {FILL_TASKS, ADD_DATE_WITH_TASKS} from './types'
 import axios from "axios";
-import {compareDate} from "../Components/DateFunctions";
+import {compareDate} from "../DateFunctions.util.js";
 
 export function addTask(token, date, taskText) {
     return async function (dispatch) {
@@ -68,8 +68,6 @@ export function deleteAllTask(token, date) {
             console.log('Remove: ' + item._id)
             dispatch(deleteTask(token, date, item._id))
         })
-
-        dispatch(fillTasks(token, date))
     }
 }
 
@@ -94,6 +92,8 @@ export function fillTasks(token, selectedDate) {
             if (compareDate(date, selectedDate)) {
                 tasks.push({id: item._id, text: text, completed: item.completed})
             }
+
+            dispatch({type: ADD_DATE_WITH_TASKS, payload: date})
         })
 
         dispatch({type: FILL_TASKS, payload: tasks})
