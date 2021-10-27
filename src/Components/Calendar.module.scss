@@ -9,6 +9,7 @@
 .todoBlock {
     width: 400px;
     height: 550px;
+    background: $main-back-liner-color;
     background-color: $main-color;
     box-shadow: rgba(0, 0, 0, 0.2) 10px 10px 5px;
     z-index: 1;
@@ -54,7 +55,7 @@
     padding: 20px 40px;
     width: 400px;
     height: 460px;
-    box-shadow: rgba(0, 0, 0, 0.2) 2px 10px 5px;
+    box-shadow: rgba(0, 0, 0, 0.2) 2px 8px 5px;
     background-color: white;
 }
 

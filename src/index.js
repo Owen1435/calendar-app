@@ -5,9 +5,7 @@ import App from './App';
 import {Provider} from "react-redux";
 import {createStore} from "redux";
 
-const defaultState = {
-
-}
+const defaultState = []
 
 //action = {type: '', payload: ''}
 const reducer = (state = defaultState, action) => {
@@ -18,7 +16,7 @@ const reducer = (state = defaultState, action) => {
     }
 }
 
-const store = createStore(reducer)
+const store = createStore(rootReducer)
 
 ReactDOM.render(
     <Provider store={store}>

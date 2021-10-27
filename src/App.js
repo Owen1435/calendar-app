@@ -4,7 +4,6 @@ import Calendar from "./Components/Calendar";
 import Login from "./Components/Login";
 import Register from "./Components/Register";
 import React, {useState} from "react";
-import TestComp from "./TestComp";
 
 function App() {
     const [token, setToken] = useState(sessionStorage.getItem('token'))
@@ -14,7 +13,7 @@ function App() {
             <Route exact path='/'>
                 <Login token={token} setToken={setToken}/>
             </Route>
-            <Route exact path='/calculator'>
+            <Route exact path='/calendar'>
                 {token
                     ? <Calendar token={token}/>
                     : <Login token={token} setToken={setToken}/>

@@ -15,7 +15,15 @@
     background-color: rgba(128, 128, 128, 0.15);
   }
 
+  &.current {
+    color: $main-color;
+    border: 1px solid $main-color;
+    padding: 0;
+    border-radius: 50%;
+  }
+
   &.selected{
+    background: $main-back-radial-color;
     background-color: $main-color;
     color: white;
     border-radius: 50%;

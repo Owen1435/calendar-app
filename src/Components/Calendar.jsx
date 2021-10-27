@@ -75,7 +75,7 @@ const Calendar = ({token}) => {
             });
         console.log('deletePost: ' + response.statusText);
 
-        getPosts(selectedDate)
+        await getPosts(selectedDate)
     }
 
     async function completePost(item) {

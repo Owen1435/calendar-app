@@ -21,7 +21,7 @@ const Register = () => {
 
     return (
         <>
-            <a href={"/calculator"}>calculator</a>
+            <a href={"/calendar"}>calculator</a>
 
             <div className={s.loginForm}>
                 <div className={s.title}>REGISTER FORM</div>

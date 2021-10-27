@@ -19,12 +19,12 @@ const Login = ({token, setToken}) => {
         sessionStorage.setItem('token', res.data.token);
         setToken(res.data.token)
 
-        history.push('/calculator')
+        history.push('/calendar')
     }
 
     return (
         <>
-            <a href={"/calculator"}>calculator</a>
+            <a href={"/calendar"}>calculator</a>
 
             <div className={s.loginForm}>
                 <div className={s.title}>LOGIN FORM</div>

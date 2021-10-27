@@ -5,7 +5,11 @@ import s from './CalendarCell.module.scss'
 
 const CalendarCell = ({day, selectDate, selectedDate}) => {
     return (
-        <button className={classnames(s.calendar__cell, {[s.selected]:compareDate(day.date,selectedDate), [s.disabled]: day.disabled})}
+        <button className={classnames(s.calendar__cell, {
+            [s.selected]: compareDate(day.date, selectedDate),
+            [s.disabled]: day.disabled,
+            [s.current]: compareDate(day.date, new Date())
+        })}
                 onClick={() => selectDate(day.date)}>{day.date?.getDate()}</button>
     );
 };
