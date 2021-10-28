@@ -1,9 +1,10 @@
-import {FILL_TASKS, ADD_DATE_WITH_TASKS} from './types'
+import {FILL_TASKS, ADD_DATE_WITH_TASKS, MAKE_LOADED, MAKE_UNLOADED} from './types'
 import axios from "axios";
 import {compareDate} from "../DateFunctions.util.js";
 
 export function addTask(token, date, taskText) {
     return async function (dispatch) {
+        dispatch({type: MAKE_UNLOADED})
         const response = await axios.post('https://api-nodejs-todolist.herokuapp.com/task',
             {
                 "description": JSON.stringify({'date': date.getTime(), 'text': taskText})
@@ -23,6 +24,7 @@ export function addTask(token, date, taskText) {
 
 export function deleteTask(token, date, id) {
     return async function (dispatch) {
+        dispatch({type: MAKE_UNLOADED})
         const response = await axios.delete('https://api-nodejs-todolist.herokuapp.com/task/' + id,
             {
                 headers: {
@@ -38,6 +40,7 @@ export function deleteTask(token, date, id) {
 
 export function completeTask(token, date, task) {
     return async function (dispatch) {
+        dispatch({type: MAKE_UNLOADED})
         const response = await axios.put('https://api-nodejs-todolist.herokuapp.com/task/' + task.id,
             {
                 "completed": !task.completed
@@ -56,6 +59,7 @@ export function completeTask(token, date, task) {
 
 export function deleteAllTask(token, date) {
     return async function (dispatch) {
+        dispatch({type: MAKE_UNLOADED})
         const response = await axios.get('https://api-nodejs-todolist.herokuapp.com/task',
             {
                 headers: {
@@ -97,5 +101,6 @@ export function fillTasks(token, selectedDate) {
         })
 
         dispatch({type: FILL_TASKS, payload: tasks})
+        dispatch({type: MAKE_LOADED})
     }
 }

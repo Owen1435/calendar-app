@@ -3,10 +3,12 @@ import TodoItem from "./TodoItem";
 import s from './TodoLIst.module.scss'
 import {useDispatch, useSelector} from "react-redux";
 import {addTask} from "../Redux/actions";
+import {CircularProgress} from "@mui/material";
 
 const TodoList = ({token, selectedDate, isDisabledBtn, setDisabledBtn}) => {
     const dispatch = useDispatch()
     const tasks = useSelector(state => state.tasks.items)
+    const isLoaded = useSelector(state => state.tasks.isLoaded)
 
     const [title, setTitle] = useState('')
 
@@ -21,12 +23,21 @@ const TodoList = ({token, selectedDate, isDisabledBtn, setDisabledBtn}) => {
 
     return (
         <div className={s.todoList}>
-            <div className={s.items}>
-                {tasks?.map(item => <TodoItem key={item.id} item={item} token={token} selectedDate={selectedDate}/>)}
-            </div>
+            {isLoaded
+                ?
+                <div className={s.items}>
+                    {tasks?.map(item => <TodoItem key={item.id} item={item} token={token}
+                                                  selectedDate={selectedDate}/>)}
+                </div>
+                :
+                <div className={s.progressBlock}>
+                    <CircularProgress className={s.progress}/>
+                </div>
+            }
 
             <div className={s.input}>
-                <input disabled={isDisabledBtn} type="text" value={title} onChange={e => setTitle(e.target.value)} onKeyUp={e => e.keyCode === 13 && addItem()} placeholder={'todo text (press Enter to save)'}/>
+                <input disabled={isDisabledBtn} type="text" value={title} onChange={e => setTitle(e.target.value)}
+                       onKeyUp={e => e.keyCode === 13 && addItem()} placeholder={'todo text (press Enter to save)'}/>
             </div>
         </div>
     );

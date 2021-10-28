@@ -5,13 +5,17 @@ import {fillTasks} from "../Redux/actions";
 import s from "../Components/Calendar.module.scss";
 import Calendar from "../Components/Calendar";
 import TodoBlock from "../Components/TodoBlock";
+import {MAKE_UNLOADED} from "../Redux/types";
 
 const MainPage = ({token}) => {
     const dispatch = useDispatch()
     let [selectedDate, setSelectedDate] = useState(new Date())
     const [user, setUser] = useState()
 
-    useEffect(() => dispatch(fillTasks(token, selectedDate)), [selectedDate])
+    useEffect(() => {
+        dispatch(fillTasks(token, selectedDate))
+        dispatch({type: MAKE_UNLOADED})
+    }, [selectedDate])
 
     return (
         <>
