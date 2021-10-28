@@ -21,7 +21,7 @@ const RegisterPage = () => {
 
     return (
         <>
-            <a href={"/calendar"}>calculator</a>
+            <a href={"/calendar"}>calendar</a>
 
             <div className={s.loginForm}>
                 <div className={s.title}>REGISTER FORM</div>

@@ -23,18 +23,17 @@ const LoginPage = ({token, setToken}) => {
 
     return (
         <>
-            <a href={"/calendar"}>calculator</a>
+            <a href={"/calendar"}>calendar</a>
 
             <div className={s.loginForm}>
                 <div className={s.title}>LOGIN FORM</div>
 
                 <div className={s.inputBlock}>
                     <input type="text" value={login} onChange={e => setLogin(e.target.value)} placeholder='login(email)'/>
-                    <input type="text" value={pass} onChange={e => setPass(e.target.value)} placeholder='password'/>
+                    <input type="password" value={pass} onChange={e => setPass(e.target.value)} placeholder='password'/>
                 </div>
 
                 <div className={s.buttons}>
-                    {/*<button onClick={Login}>Sign in</button>*/}
                     <Button variant="contained" onClick={Login}>Sign in</Button>
                     <a href={"/register"}>Register</a>
                 </div>

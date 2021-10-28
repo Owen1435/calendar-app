@@ -4,12 +4,12 @@ import {getDayName} from "../DateFunctions.util.js";
 import TodoList from "./TodoList";
 
 const TodoBlock = ({token, selectedDate}) => {
-    const [isDisabledBtn, setDisabledBtn] = useState(true)
+    const [adding, setAdding] = useState(true)
 
     return (
         <div className={s.todoBlock}>
             <div className={s.todoBlock__add}>
-                <button onClick={() => setDisabledBtn(!isDisabledBtn)}>+</button>
+                <button onClick={() => setAdding(!adding)}>+</button>
             </div>
             <div className={s.selectedDate}>
                 <div className={s.selectedDate__day}>{selectedDate.getDate()}</div>
@@ -18,8 +18,8 @@ const TodoBlock = ({token, selectedDate}) => {
 
             <TodoList token={token}
                       selectedDate={selectedDate}
-                      isDisabledBtn={isDisabledBtn}
-                      setDisabledBtn={setDisabledBtn}/>
+                      adding={adding}
+                      setAdding={setAdding}/>
         </div>
     );
 };

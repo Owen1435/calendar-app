@@ -2,12 +2,17 @@ import {FILL_TASKS, ADD_DATE_WITH_TASKS, MAKE_LOADED, MAKE_UNLOADED} from './typ
 import axios from "axios";
 import {compareDate} from "../DateFunctions.util.js";
 
-export function addTask(token, date, taskText) {
+export function addTask(token, date, taskText, timeFrom, timeTo) {
     return async function (dispatch) {
         dispatch({type: MAKE_UNLOADED})
         const response = await axios.post('https://api-nodejs-todolist.herokuapp.com/task',
             {
-                "description": JSON.stringify({'date': date.getTime(), 'text': taskText})
+                "description": JSON.stringify({
+                    'date': date.getTime(),
+                    'timeFrom': timeFrom,
+                    'timeTo': timeTo,
+                    'text': taskText
+                })
             },
             {
                 headers: {
@@ -92,9 +97,11 @@ export function fillTasks(token, selectedDate) {
 
             const date = new Date(object.date)
             const text = object.text
+            const timeFrom = object.timeFrom
+            const timeTo = object.timeTo
 
             if (compareDate(date, selectedDate)) {
-                tasks.push({id: item._id, text: text, completed: item.completed})
+                tasks.push({id: item._id, text: text, timeFrom: timeFrom, timeTo: timeTo, completed: item.completed})
             }
 
             dispatch({type: ADD_DATE_WITH_TASKS, payload: date})

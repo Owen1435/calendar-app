@@ -16,34 +16,57 @@
         width: 13px;
         height: 13px;
         margin-right: 8px;
-        background-color: rgba(255, 255, 255, 0.5);
+        background-color: rgba(255, 255, 255, 0.4);
         border: none;
         border-radius: 3px;
         cursor: pointer;
 
-        img {
-            height: 15px;
+        .check {
             opacity: 0;
+            fill: white;
+            stroke: white;
         }
     }
 
     &.completed{
         .completeBtn {
-            img {
+            .check {
                 opacity: 1;
             }
         }
     }
 
     .content {
-        width: 200px;
-        overflow: hidden;
+        width: 270px;
+
+        .time {
+            font-size: 14px;
+            color: white;
+            margin-right: 10px;
+        }
+
+        .text {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        &:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+            cursor: pointer;
+        }
     }
 
     &.completed{
         .content {
             color: rgba(255, 255, 255, 0.4);
-            text-decoration: line-through;
+            .text {
+                color: rgba(255, 255, 255, 0.4);
+                text-decoration: line-through;
+            }
+            .time {
+                color: rgba(255, 255, 255, 0.4);
+            }
         }
     }
 }
@@ -51,7 +74,6 @@
 .delete {
     position: absolute;
     right: 10px;
-    bottom: 10px;
 
     button {
         padding: 0;
