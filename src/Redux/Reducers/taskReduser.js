@@ -1,4 +1,4 @@
-import {FILL_TASKS, ADD_DATE_WITH_TASKS, MAKE_LOADED, MAKE_UNLOADED} from './types'
+import {ADD_TASKS, ADD_DATE_WITH_TASKS, MAKE_LOADED, MAKE_UNLOADED} from '../types'
 
 const defaultState = {
     items: [],
@@ -8,7 +8,7 @@ const defaultState = {
 
 function taskReducer(state = defaultState, action) {
     switch (action.type) {
-        case FILL_TASKS:
+        case ADD_TASKS:
             return {...state, items: action.payload}
         case ADD_DATE_WITH_TASKS:
             return {...state, dateWithTasks: [...state.dateWithTasks, action.payload]}

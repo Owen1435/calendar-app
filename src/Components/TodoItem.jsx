@@ -1,8 +1,9 @@
 import React from 'react';
 import classnames from 'classnames'
 import s from './TodoItem.module.scss'
-import {completeTask, deleteTask} from "../Redux/actions";
+//import {completeTask, deleteTask} from "../Redux/actions";
 import {useDispatch} from "react-redux";
+import {completeTask, deleteTask} from "../Redux/Sagas/taskSaga";
 
 const TodoItem = ({token, selectedDate, item, edit}) => {
     const dispatch = useDispatch()
