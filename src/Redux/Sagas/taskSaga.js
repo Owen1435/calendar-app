@@ -1,7 +1,5 @@
-import {takeEvery, call, put} from "redux-saga/effects"
-import axios from "axios";
 import {
-    ADD_DATE_WITH_TASKS,
+    SET_DATES_WITH_TASKS,
     ADD_TASK,
     ADD_TASKS,
     COMPLETE_TASK, DELETE_ALL_TASK,
@@ -10,59 +8,10 @@ import {
     MAKE_LOADED,
     MAKE_UNLOADED
 } from "../types";
-import {compareDate} from "../../DateFunctions.util";
-
-async function getTasksRequest(token) {
-    return await axios.get('https://api-nodejs-todolist.herokuapp.com/task',
-        {
-            headers: {
-                'Authorization': 'Bearer ' + token,
-                'Content-Type': 'application/json'
-            }
-        });
-}
-
-async function addTaskRequest(token, date, timeFrom, timeTo, taskText) {
-    return await axios.post('https://api-nodejs-todolist.herokuapp.com/task',
-        {
-            "description": JSON.stringify({
-                'date': date.getTime(),
-                'timeFrom': timeFrom,
-                'timeTo': timeTo,
-                'text': taskText
-            })
-        },
-        {
-            headers: {
-                'Authorization': 'Bearer ' + token,
-                'Content-Type': 'application/json'
-            }
-        });
-}
-
-async function completeTaskRequest(token, task) {
-    return await axios.put('https://api-nodejs-todolist.herokuapp.com/task/' + task.id,
-        {
-            "completed": !task.completed
-        },
-        {
-            headers: {
-                'Authorization': 'Bearer ' + token,
-                'Content-Type': 'application/json'
-            }
-        });
-}
-
-async function deleteTaskRequest(token, id) {
-    return await axios.delete('https://api-nodejs-todolist.herokuapp.com/task/' + id,
-        {
-            headers: {
-                'Authorization': 'Bearer ' + token,
-                'Content-Type': 'application/json'
-            }
-        });
-}
-
+import {takeEvery, call, put} from "redux-saga/effects"
+import {fillTasks, deleteTask} from "./taskActions";
+import {getTasksRequest, addTaskRequest, deleteTaskRequest, completeTaskRequest} from "./taskRequest";
+import {handleTasks} from "../../Utils/taskHandler.util";
 
 function* fillTasksWorker(action) {
     const {date, token} = action.payload
@@ -70,41 +19,9 @@ function* fillTasksWorker(action) {
     try {
         const response = yield call(getTasksRequest, token)
 
-        const tasks = []
-        const allTasks = response.data.data
+        const {tasks, dateWithTasks} = handleTasks(response.data.data, date)
 
-        for (let i = 0; i < allTasks.length; i++) {
-            const item = allTasks[i]
-
-            const object = JSON.parse(item.description)
-
-            const taskDate = new Date(object.date)
-            const text = object.text
-            const timeFrom = object.timeFrom
-            const timeTo = object.timeTo
-
-            if (compareDate(taskDate, date)) {
-                tasks.push({id: item._id, text: text, timeFrom: timeFrom, timeTo: timeTo, completed: item.completed})
-            }
-
-            yield put({type: ADD_DATE_WITH_TASKS, payload: taskDate})
-        }
-
-        // allTasks.forEach((item) => {
-        //     const object = JSON.parse(item.description)
-        //
-        //     const taskDate = new Date(object.date)
-        //     const text = object.text
-        //     const timeFrom = object.timeFrom
-        //     const timeTo = object.timeTo
-        //
-        //     if (compareDate(taskDate, date)) {
-        //         tasks.push({id: item._id, text: text, timeFrom: timeFrom, timeTo: timeTo, completed: item.completed})
-        //     }
-        //
-        //     put({type: ADD_DATE_WITH_TASKS, payload: taskDate})
-        // })
-
+        yield put({type: SET_DATES_WITH_TASKS, payload: dateWithTasks})
         yield put({type: ADD_TASKS, payload: tasks})
         yield put({type: MAKE_LOADED})
     } catch (error) {
@@ -175,63 +92,3 @@ export function* taskWatcher() {
     yield takeEvery(DELETE_TASK, deleteTaskWorker)
     yield takeEvery(DELETE_ALL_TASK, deleteAllTaskWorker)
 }
-
-
-export function fillTasks(token, date) {
-    return {
-        type: FILL_TASKS,
-        payload: {
-            token,
-            date,
-        }
-    }
-}
-
-export function addTask(token, date, taskText, timeFrom, timeTo) {
-    return {
-        type: ADD_TASK,
-        payload: {
-            token,
-            date,
-            taskText,
-            timeFrom,
-            timeTo,
-        }
-    }
-}
-
-export function completeTask(token, date, task) {
-    return {
-        type: COMPLETE_TASK,
-        payload: {
-            token,
-            date,
-            task,
-        }
-    }
-}
-
-export function deleteTask(token, date, id) {
-    return {
-        type: DELETE_TASK,
-        payload: {
-            token,
-            date,
-            id
-        }
-    }
-}
-
-export function deleteAllTask(token, date) {
-    return {
-        type: DELETE_ALL_TASK,
-        payload: {
-            token,
-            date,
-        }
-    }
-}
-
-
-
-//const delay = (ms) => new Promise(res => setTimeout(res, ms))

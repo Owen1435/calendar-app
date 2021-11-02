@@ -1,8 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import Header from "../Components/Header";
 import {useDispatch} from "react-redux";
-//import {fillTasks} from "../Redux/actions";
-import {fillTasks} from "../Redux/Sagas/taskSaga";
+import {fillTasks} from "../Redux/Sagas/taskActions";
 import s from "../Components/Calendar.module.scss";
 import Calendar from "../Components/Calendar";
 import {MAKE_UNLOADED} from "../Redux/types";
@@ -14,8 +13,8 @@ const MainPage = ({token}) => {
     const [user, setUser] = useState()
 
     useEffect(() => {
-        dispatch(fillTasks(token, selectedDate))
         dispatch({type: MAKE_UNLOADED})
+        dispatch(fillTasks(token, selectedDate))
     }, [selectedDate])
 
     return (

@@ -3,7 +3,7 @@ import CalendarCell from "./CalendarCell";
 import WeekdayCell from "./WeekdayCell";
 
 import s from './Calendar.module.scss'
-import {weekday, getMonthName, getPrevMonth, getNextMonth, getDaysArr} from '../DateFunctions.util.js'
+import {weekday, getMonthName, getPrevMonth, getNextMonth, getDaysArr} from '../Utils/DateFunctions.util.js'
 
 const Calendar = ({token, selectedDate, setSelectedDate}) => {
     let days = getDaysArr(selectedDate)

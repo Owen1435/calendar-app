@@ -2,10 +2,9 @@ import React, {useState} from 'react';
 import TodoItem from "./TodoItem";
 import s from './TodoLIst.module.scss'
 import {useDispatch, useSelector} from "react-redux";
-//import {addTask, deleteTask} from "../Redux/actions";
 import {CircularProgress} from "@mui/material";
-import EditWindow from "./editWindow";
-import {addTask, deleteTask} from "../Redux/Sagas/taskSaga";
+import EditWindow from "./EditWindow";
+import {addTask, deleteTask} from "../Redux/Sagas/taskActions";
 
 const TodoList = ({token, selectedDate, adding, setAdding}) => {
     const dispatch = useDispatch()

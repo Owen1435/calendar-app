@@ -1,5 +1,5 @@
 import React from 'react';
-import {compareDate} from '../DateFunctions.util.js'
+import {compareDate} from '../Utils/DateFunctions.util.js'
 import classnames from "classnames";
 import s from './CalendarCell.module.scss'
 import {useSelector} from "react-redux";

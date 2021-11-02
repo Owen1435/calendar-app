@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import s from "./TodoBlock.module.scss";
-import {getDayName} from "../DateFunctions.util.js";
+import {getDayName} from "../Utils/DateFunctions.util.js";
 import TodoList from "./TodoList";
 
 const TodoBlock = ({token, selectedDate}) => {

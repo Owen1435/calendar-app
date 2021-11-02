@@ -6,8 +6,7 @@ import axios from "axios";
 import {Button, Menu, MenuItem, Tooltip} from "@mui/material";
 import {useHistory} from "react-router-dom";
 import {useDispatch} from "react-redux";
-import {deleteAllTask} from "../Redux/Sagas/taskSaga";
-//import {deleteAllTask} from "../Redux/actions";
+import {deleteAllTask} from "../Redux/Sagas/taskActions";
 
 
 const Header = ({token,selectedDate, user, setUser}) => {
