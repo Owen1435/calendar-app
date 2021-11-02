@@ -7,35 +7,37 @@ import EditWindow from "./EditWindow";
 import {addTask, deleteTask} from "../Redux/Sagas/taskActions";
 
 const TodoList = ({token, selectedDate, adding, setAdding}) => {
-    const dispatch = useDispatch()
-    const tasks = useSelector(state => state.tasks.items)
-    const isLoaded = useSelector(state => state.tasks.isLoaded)
-
     const [title, setTitle] = useState('')
     const [timeFrom, setTimeFrom] = useState('')
     const [timeTo, setTimeTo] = useState('')
+    const [editing, setEditing] = useState(false)  //костыль
+    const [_editItem, setEditItem] = useState({})  //костыль
+
+    const tasks = useSelector(state => state.tasks.items)
+    const isLoaded = useSelector(state => state.tasks.isLoaded)
+
+    const dispatch = useDispatch()
+
+    function resetInputs () {
+        setTitle('')
+        setTimeFrom('')
+        setTimeTo('')
+    }
 
     function addItem() {
         if (title !== '') {
             dispatch(addTask(token, selectedDate, title, timeFrom, timeTo))
         }
 
-        setTitle('')
-        setTimeFrom('')
-        setTimeTo('')
+        resetInputs()
         setAdding(true)
     }
 
     function cancel() {
-        setTitle('')
-        setTimeFrom('')
-        setTimeTo('')
+        resetInputs()
         setAdding(true)
         setEditing(false)
     }
-
-    const [editing, setEditing] = useState(false)  //костыль
-    const [_editItem, setEditItem] = useState({})  //костыль
 
     function edit(item) {
         setEditing(true)
@@ -50,9 +52,7 @@ const TodoList = ({token, selectedDate, adding, setAdding}) => {
         dispatch(deleteTask(token, selectedDate, _editItem.id))
         dispatch(addTask(token, selectedDate, title, timeFrom, timeTo))
 
-        setTitle('')
-        setTimeFrom('')
-        setTimeTo('')
+        resetInputs()
         setEditing(false)
     } //костыль
 
