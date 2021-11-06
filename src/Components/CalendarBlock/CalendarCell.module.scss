@@ -1,4 +1,4 @@
-@import '../app';
+@import '../../App';
 
 .calendar__cell{
   font-family: 'Montserrat', sans-serif;
@@ -10,8 +10,10 @@
   margin: 2px 0;
   background-color: white;
   font-size: 20px;
+  transition: 1s;
 
   &:hover {
+    transition: none;
     background-color: rgba(128, 128, 128, 0.15);
   }
 
@@ -24,7 +26,6 @@
 
   &.selected{
     background: $main-back-liner-color;
-    background-color: $main-color;
     color: white;
     border-radius: 50%;
   }

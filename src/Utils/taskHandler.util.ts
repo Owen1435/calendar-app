@@ -1,8 +1,16 @@
 import {compareDate} from "./DateFunctions.util";
 
-export function handleTasks(allTasks, date) {
-    const dateWithTasks = []
-    const tasks = []
+export interface ITask {
+    id: string
+    text: string
+    timeFrom: string
+    timeTo: string
+    completed: boolean
+}
+
+export function handleTasks(allTasks: any[], date: Date) {
+    const dateWithTasks: Date[] = []
+    const tasks: ITask[] = []
 
     allTasks.forEach((item) => {
         const object = JSON.parse(item.description)

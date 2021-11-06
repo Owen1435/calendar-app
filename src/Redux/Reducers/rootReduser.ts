@@ -5,6 +5,7 @@ import {composeWithDevTools} from "redux-devtools-extension";
 import createSagaMiddleware from "redux-saga";
 import rootSaga from "../Sagas/rootSaga";
 
+
 export const rootReducer = combineReducers({
     tasks: taskReducer,
     user: userReducer
@@ -21,4 +22,5 @@ const store = createStore(
 
 sagaMiddleware.run(rootSaga)
 
+export type RootState = ReturnType<typeof rootReducer>
 export default store

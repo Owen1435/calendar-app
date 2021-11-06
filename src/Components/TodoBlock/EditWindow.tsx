@@ -2,7 +2,19 @@ import React from 'react';
 import s from "./EditWindow.module.scss";
 import {Button, TextField} from "@mui/material";
 
-const EditWindow = ({title, setTitle, timeFrom, setTimeFrom, timeTo, setTimeTo, cancel, name, funcItem}) => {
+interface EditWindowProps {
+    name: string
+    title: string
+    timeFrom: string
+    timeTo: string
+    setTitle: React.Dispatch<string>
+    setTimeFrom: React.Dispatch<string>
+    setTimeTo: React.Dispatch<string>
+    cancel(): void
+    funcItem(): void
+}
+
+const EditWindow: React.FC<EditWindowProps> = ({title, setTitle, timeFrom, setTimeFrom, timeTo, setTimeTo, cancel, name, funcItem}) => {
     return (
         <div className={s.editWindow}>
             <TextField value={title} onChange={e => setTitle(e.target.value)} label="Text" variant="outlined"/>

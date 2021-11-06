@@ -1,30 +1,39 @@
 import React, {useState} from 'react';
 import TodoItem from "./TodoItem";
 import s from './TodoLIst.module.scss'
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {CircularProgress} from "@mui/material";
 import EditWindow from "./EditWindow";
-import {addTask, deleteTask} from "../Redux/Sagas/taskActions";
+import {addTask, deleteTask} from "../../Redux/Sagas/taskActions";
+import {useTypedSelector} from "../../Redux/Reducers/useTypedSelector";
+import {ITask} from "../../Utils/taskHandler.util"
 
-const TodoList = ({token, selectedDate, adding, setAdding}) => {
+interface TodoListProps {
+    token: string
+    selectedDate: Date
+    adding: boolean
+    setAdding: React.Dispatch<boolean>
+}
+
+const TodoList: React.FC<TodoListProps> = ({token, selectedDate, adding, setAdding}) => {
     const [title, setTitle] = useState('')
     const [timeFrom, setTimeFrom] = useState('')
     const [timeTo, setTimeTo] = useState('')
     const [editing, setEditing] = useState(false)  //костыль
-    const [_editItem, setEditItem] = useState({})  //костыль
+    const [_editItem, setEditItem] = useState<ITask | undefined>(undefined)  //костыль
 
-    const tasks = useSelector(state => state.tasks.items)
-    const isLoaded = useSelector(state => state.tasks.isLoaded)
+    const tasks: ITask[] = useTypedSelector(state => state.tasks.items)
+    const isLoaded: boolean = useTypedSelector(state => state.tasks.isLoaded)
 
     const dispatch = useDispatch()
 
-    function resetInputs () {
+    function resetInputs(): void {
         setTitle('')
         setTimeFrom('')
         setTimeTo('')
     }
 
-    function addItem() {
+    function addItem(): void {
         if (title !== '') {
             dispatch(addTask(token, selectedDate, title, timeFrom, timeTo))
         }
@@ -33,13 +42,13 @@ const TodoList = ({token, selectedDate, adding, setAdding}) => {
         setAdding(true)
     }
 
-    function cancel() {
+    function cancel(): void {
         resetInputs()
         setAdding(true)
         setEditing(false)
     }
 
-    function edit(item) {
+    function edit(item: ITask): void {
         setEditing(true)
         setTitle(item.text)
         setTimeFrom(item.timeFrom)
@@ -48,8 +57,8 @@ const TodoList = ({token, selectedDate, adding, setAdding}) => {
         setEditItem(item)
     }
 
-    function editItem() {
-        dispatch(deleteTask(token, selectedDate, _editItem.id))
+    function editItem(): void {
+        dispatch(deleteTask(token, selectedDate, _editItem?.id))
         dispatch(addTask(token, selectedDate, title, timeFrom, timeTo))
 
         resetInputs()
@@ -73,12 +82,13 @@ const TodoList = ({token, selectedDate, adding, setAdding}) => {
             {!adding
                 ?
                 <EditWindow title={title} setTitle={setTitle} timeFrom={timeFrom} setTimeFrom={setTimeFrom}
-                            timeTo={timeTo} setTimeTo={setTimeTo} cancel={cancel} name = {'add'} funcItem={addItem}/>
+                            timeTo={timeTo} setTimeTo={setTimeTo} cancel={cancel} name={'add'} funcItem={addItem}/>
                 :
                 editing
                     ?
                     <EditWindow title={title} setTitle={setTitle} timeFrom={timeFrom} setTimeFrom={setTimeFrom}
-                                timeTo={timeTo} setTimeTo={setTimeTo} cancel={cancel} name = {'edit'} funcItem={editItem}/>
+                                timeTo={timeTo} setTimeTo={setTimeTo} cancel={cancel} name={'edit'}
+                                funcItem={editItem}/>
                     :
                     <></>
             }

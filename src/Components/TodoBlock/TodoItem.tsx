@@ -2,9 +2,17 @@ import React from 'react';
 import classnames from 'classnames'
 import s from './TodoItem.module.scss'
 import {useDispatch} from "react-redux";
-import {completeTask, deleteTask} from "../Redux/Sagas/taskActions";
+import {completeTask, deleteTask} from "../../Redux/Sagas/taskActions";
+import {ITask} from "../../Utils/taskHandler.util"
 
-const TodoItem = ({token, selectedDate, item, edit}) => {
+interface TodoItemProps {
+    token: string
+    selectedDate: Date
+    item: ITask
+    edit(item: ITask): void
+}
+
+const TodoItem: React.FC<TodoItemProps>= ({token, selectedDate, item, edit}) => {
     const dispatch = useDispatch()
 
     function deleteItem() {

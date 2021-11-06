@@ -1,3 +1,14 @@
+export interface IDay {
+    date: Date
+    disabled: boolean
+}
+
+export interface IWeekDay {
+    name: string
+    fullName: string
+    className: string
+}
+
 let month = [{fullName: 'January', name: 'Jan'},
     {fullName: 'February', name: 'Feb'},
     {fullName: 'March', name: 'Mar'},
@@ -10,7 +21,7 @@ let month = [{fullName: 'January', name: 'Jan'},
     {fullName: 'October', name: 'Oct'},
     {fullName: 'November', name: 'Nov'},
     {fullName: 'December', name: 'Dec'}]
-let weekday = [
+let weekday: Array<IWeekDay> = [
     {name: 'mo', fullName: 'Monday', className: ''},
     {name: 'tu', fullName: 'Tuesday', className: ''},
     {name: 'we', fullName: 'Wednesday', className: ''},
@@ -19,7 +30,7 @@ let weekday = [
     {name: 'sa', fullName: 'Saturday', className: 'weekend'},
     {name: 'su', fullName: 'Sunday', className: 'weekend'}]
 
-function getDateRange(year) {
+function getDateRange(year: number): number[] {
     let range = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
 
     if (year % 5 === 0) {
@@ -29,9 +40,9 @@ function getDateRange(year) {
     return range
 }
 
-function getDaysArr(selectedDate) {
-    let days = []
-    let dateRange = getDateRange(selectedDate.getFullYear())
+function getDaysArr(selectedDate: Date): IDay[] {
+    let days: IDay[] = []
+    let dateRange: number[] = getDateRange(selectedDate.getFullYear())
     let firstDay = new Date(selectedDate.getFullYear(), selectedDate.getMonth(), 1).getDay()
 
     let lastDateOfPrevMonth = getDateRange(selectedDate.getFullYear())[(selectedDate.getMonth() - 1) < 0 ? 11 : (selectedDate.getMonth() - 1)]
@@ -52,26 +63,26 @@ function getDaysArr(selectedDate) {
     return days
 }
 
-function getDayName(selectedDate) {
+function getDayName(selectedDate: Date): string{
     if (selectedDate.getDay() === 0) {
         return weekday[6].fullName.toUpperCase()
     }
     return weekday[selectedDate.getDay() - 1].fullName.toUpperCase()
 }
 
-function getMonthName(selectedDate) {
+function getMonthName(selectedDate: Date): string {
     return month[selectedDate.getMonth()].fullName
 }
 
-function getNextMonth(currentDate) {
+function getNextMonth(currentDate: Date): Date {
     return new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1)
 }
 
-function getPrevMonth(currentDate) {
+function getPrevMonth(currentDate: Date): Date {
     return new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1)
 }
 
-function compareDate(date1, date2) {
+function compareDate(date1: Date, date2: Date): boolean {
     if (!date1 || !date2) {
         return false
     }
@@ -81,4 +92,4 @@ function compareDate(date1, date2) {
         date1.getDate() === date2.getDate())
 }
 
-export {month, weekday, getDaysArr, getDayName, getMonthName, compareDate, getNextMonth, getPrevMonth}
+export {weekday, getDaysArr, getDayName, getMonthName, compareDate, getNextMonth, getPrevMonth}

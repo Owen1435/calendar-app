@@ -1,9 +1,14 @@
 import React, {useState} from 'react';
 import s from "./TodoBlock.module.scss";
-import {getDayName} from "../Utils/DateFunctions.util.js";
+import {getDayName} from "../../Utils/DateFunctions.util";
 import TodoList from "./TodoList";
 
-const TodoBlock = ({token, selectedDate}) => {
+interface TodoBlockProps {
+    token: string
+    selectedDate: Date
+}
+
+const TodoBlock: React.FC<TodoBlockProps> = ({token, selectedDate}) => {
     const [adding, setAdding] = useState(true)
 
     return (

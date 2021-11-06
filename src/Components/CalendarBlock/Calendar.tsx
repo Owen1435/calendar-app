@@ -1,11 +1,15 @@
 import React from 'react';
 import CalendarCell from "./CalendarCell";
 import WeekdayCell from "./WeekdayCell";
-
 import s from './Calendar.module.scss'
-import {weekday, getMonthName, getPrevMonth, getNextMonth, getDaysArr} from '../Utils/DateFunctions.util.js'
+import {weekday, getMonthName, getPrevMonth, getNextMonth, getDaysArr} from '../../Utils/DateFunctions.util'
 
-const Calendar = ({token, selectedDate, setSelectedDate}) => {
+interface CalendarProps {
+    selectedDate: Date
+    setSelectedDate: React.Dispatch<Date>
+}
+
+const Calendar: React.FC<CalendarProps> = ({selectedDate, setSelectedDate}) => {
     let days = getDaysArr(selectedDate)
 
     return (
@@ -24,7 +28,7 @@ const Calendar = ({token, selectedDate, setSelectedDate}) => {
             </div>
 
             <div className={s.calendar__days}>
-                {days.map(day => <CalendarCell key={day.date} day={day} setSelectedDate={setSelectedDate}
+                {days.map(day => <CalendarCell key={day.date.getTime()} day={day} setSelectedDate={setSelectedDate}
                                                selectedDate={selectedDate}/>)}
             </div>
         </div>

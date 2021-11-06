@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import s from "../Components/Login.module.scss";
+import s from "./Login.module.scss";
 import axios from "axios";
 import {Button} from "@mui/material";
 
@@ -9,14 +9,11 @@ const RegisterPage = () => {
     const [email, setEmail] = useState('')
 
     async function Register() {
-
-        const res = await axios.post('https://api-nodejs-todolist.herokuapp.com/user/register', {
+        await axios.post('https://api-nodejs-todolist.herokuapp.com/user/register', {
             name: login,
             password: pass,
             email: email,
         });
-
-        console.log(res.status);
     }
 
     return (
