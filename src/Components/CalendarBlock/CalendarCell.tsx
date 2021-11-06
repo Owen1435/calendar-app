@@ -1,11 +1,17 @@
 import React from 'react';
-import {compareDate} from '../Utils/DateFunctions.util.js'
+import {compareDate, IDay} from '../../Utils/DateFunctions.util'
 import classnames from "classnames";
 import s from './CalendarCell.module.scss'
-import {useSelector} from "react-redux";
+import {useTypedSelector} from "../../Redux/Reducers/useTypedSelector";
 
-const CalendarCell = ({day, setSelectedDate, selectedDate}) => {
-    const dateWithTasks = useSelector(state => state.tasks.dateWithTasks)
+interface CalendarCellProps {
+    day: IDay
+    selectedDate: Date
+    setSelectedDate: React.Dispatch<Date>
+}
+
+const CalendarCell: React.FC<CalendarCellProps> = ({day, selectedDate, setSelectedDate}) => {
+    const dateWithTasks: Date[] = useTypedSelector(state => state.tasks.dateWithTasks)
 
     function isHaveTasks() {
         let isContains = false

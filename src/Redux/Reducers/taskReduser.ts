@@ -1,12 +1,13 @@
 import {ADD_TASKS, SET_DATES_WITH_TASKS, MAKE_LOADED, MAKE_UNLOADED} from '../types'
+import {UserState, UserAction} from "./taskTypes"
 
-const defaultState = {
+const defaultState: UserState = {
     items: [],
     dateWithTasks: [],
     isLoaded: false
 }
 
-function taskReducer(state = defaultState, action) {
+function taskReducer(state = defaultState, action: UserAction): UserState {
     switch (action.type) {
         case ADD_TASKS:
             return {...state, items: action.payload}

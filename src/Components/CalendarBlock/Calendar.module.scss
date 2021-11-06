@@ -1,4 +1,4 @@
-@import '../app';
+@import '../../App';
 
 .main {
     display: flex;
@@ -61,10 +61,16 @@
 }
 
 .calendar__button{
+    color: rgba(128, 128, 128, 0.6);
     background-color: white;
     border: 0;
     padding: 0;
     margin: 0;
     font-size: 20px;
+    font-weight: bold;
     cursor: pointer;
+
+    &:hover {
+        color: black;
+    }
 }

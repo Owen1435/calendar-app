@@ -1,12 +1,27 @@
-@import '../app';
+@import '../../App';
 
 .todoBlock {
   width: 400px;
   height: 550px;
-  background: $main-back-liner-color;
-  background-color: $main-color;
   box-shadow: rgba(0, 0, 0, 0.2) 10px 10px 5px;
   z-index: 1;
+
+  background: $main-back-liner-color;
+  //background: linear-gradient(149deg, rgb(19, 222, 184) 0%, rgb(62, 103, 204) 42%, rgb(166, 35, 218) 72%, rgb(130, 44, 154) 100%);
+  //animation: gradient 10s infinite linear;
+  //background-size: 500%;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 100% 0%;
+  }
+  50% {
+    background-position: 20% 100%;
+  }
+  100% {
+    background-position: 100% 0%;
+  }
 }
 
 .todoBlock__add {
@@ -19,6 +34,7 @@
     background-color: transparent;
     border: none;
     cursor: pointer;
+    text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.4);
   }
 }
 
@@ -28,6 +44,7 @@
   text-align: center;
   padding-bottom: 15px;
   color: white;
+  text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.4);
 }
 
 .selectedDate__day {
