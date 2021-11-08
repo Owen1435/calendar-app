@@ -8,7 +8,13 @@ export interface ITask {
     completed: boolean
 }
 
-export function handleTasks(allTasks: any[], date: Date) {
+interface TaskRequest {
+    _id: string
+    description: string
+    completed: boolean
+}
+
+export function handleTasks(allTasks: TaskRequest[], date: Date) {
     const dateWithTasks: Date[] = []
     const tasks: ITask[] = []
 
